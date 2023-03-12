@@ -4,7 +4,7 @@ import element_data from '@/data/elemens-data';
 
 export default function Home() {
   return (
-    <main className="container m-8">
+    <main className="m-4">
       <h1 className="text-center text-5xl font-bold my-4">
         Tabel Periodik Unsur
       </h1>
