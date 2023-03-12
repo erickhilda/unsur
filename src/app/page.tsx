@@ -1,7 +1,18 @@
+import ElementTile from '@/components/element-tile';
+import PeriodicTable from '@/components/periodic-table';
+import element_data from '@/data/elemens-data';
+
 export default function Home() {
   return (
-    <main>
-      <h2 className="text-3xl font-bold underline">Table Periodic Unsur</h2>
+    <main className="container m-8">
+      <h1 className="text-center text-5xl font-bold my-4">
+        Tabel Periodik Unsur
+      </h1>
+      <PeriodicTable>
+        {element_data.map((element) => (
+          <ElementTile key={element.name} element={element} />
+        ))}
+      </PeriodicTable>
     </main>
   );
 }
