@@ -1,4 +1,5 @@
 import BohrAtom from '@/components/bohr-atom';
+import ScatterPlot from '@/components/scatter-plot';
 import element_data from '@/data/elemens-data';
 import { ChemicalElement } from '@/types/global';
 
@@ -12,7 +13,7 @@ function ElementPage({ params }: { params: { slug: string } }) {
   const element = getElementDetails(params.slug);
 
   return (
-    <div>
+    <div className="mx-4">
       <h1 className="text-center text-5xl font-bold my-4">
         {`${element.number} - ${element.name}`}{' '}
         <span className="font-light text-gray-500">({element.category})</span>
@@ -26,7 +27,9 @@ function ElementPage({ params }: { params: { slug: string } }) {
             className="h-full w-full overflow-visible"
           />
         </div>
-        <div className="col-span-6"></div>
+        <div className="col-span-6">
+          <ScatterPlot />
+        </div>
       </div>
     </div>
   );
