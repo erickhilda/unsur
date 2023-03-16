@@ -10,7 +10,7 @@ const generateDataset = () => {
   const coord = Array(10)
     .fill(0)
     .map(() => [Math.random() * 1120 + 30, Math.random() * 220]);
-  const isShowing = true;
+  const isShowing = Math.random() > 0.5;
 
   return coord.map((d) => ({ data: d, isShowing }));
 };
@@ -59,6 +59,7 @@ function ScatterPlot() {
   useInterval(() => {
     const newDataset = dataset.map((d) => ({
       ...d,
+      isShowing: Math.random() > 0.5,
     }));
 
     setDataset(newDataset);
