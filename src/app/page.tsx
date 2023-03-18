@@ -10,7 +10,13 @@ export default function Home() {
       </h1>
       <PeriodicTable>
         {element_data.map((element) => (
-          <ElementTile key={element.name} element={element} />
+          <ElementTile
+            key={element.name}
+            element={element}
+            style={{
+              gridArea: `${element.row} / ${element.column} / auto / auto`,
+            }}
+          />
         ))}
       </PeriodicTable>
     </main>

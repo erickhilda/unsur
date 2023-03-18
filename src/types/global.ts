@@ -45,4 +45,13 @@ export type ChemicalElement = {
   summary: string;
   symbol: string;
   year: number | string;
+  image: {
+    title: string;
+    url: string;
+    attribution: string;
+  };
+  bohr_model_3d: string;
+  bohr_model_image: string;
+  source: string;
+  block: 's' | 'p' | 'd' | 'f';
 };
