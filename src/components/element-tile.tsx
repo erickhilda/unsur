@@ -28,17 +28,20 @@ function generateColorBasedOnCategory(category: string) {
   }
 }
 
-function ElementTile({ element }: { element: ChemicalElement }) {
+function ElementTile({
+  element,
+  style,
+}: {
+  element: ChemicalElement;
+  style: React.CSSProperties;
+}) {
   return (
     <Link
-      prefetch
       href={`/${element.name.toLowerCase().replace(/ /g, '-')}`}
       className={`rounded-sm aspect-w-1 aspect-h-1 relative hover:shadow-sm ${generateColorBasedOnCategory(
         element.category
       )} hover:opacity-80`}
-      style={{
-        gridArea: `${element.row} / ${element.column} / auto / auto`,
-      }}
+      style={style}
     >
       <span className="text-xs absolute left-1 top-1">{element.number}</span>
       <span className="flex flex-col justify-center items-center text-center">
