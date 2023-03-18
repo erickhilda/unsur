@@ -1,5 +1,7 @@
-import { ChemicalElement } from '@/types/global';
+import React from 'react';
 import Link from 'next/link';
+
+import { ChemicalElement } from '@/types/global';
 
 function generateColorBasedOnCategory(category: string) {
   switch (category) {
