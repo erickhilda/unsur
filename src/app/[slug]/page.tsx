@@ -1,8 +1,11 @@
 import BohrAtom from '@/components/bohr-atom';
 import ScatterPlot from '@/components/scatter-plot';
 import element_data from '@/data/elemens-data';
+import { propertyLabels } from '@/data/label';
 import { ChemicalElement } from '@/types/global';
 import Image from 'next/image';
+
+import { useMemo } from 'react';
 
 function getElementDetails(slug: string) {
   return element_data.find(
@@ -12,6 +15,22 @@ function getElementDetails(slug: string) {
 
 function ElementPage({ params }: { params: { slug: string } }) {
   const element = getElementDetails(params.slug);
+
+  const elementProperties = useMemo(() => {
+    return Object.keys(propertyLabels)
+      .filter((key) => element[key as keyof ChemicalElement])
+      .map((key) => {
+        const [label, unit] =
+          propertyLabels[key as keyof typeof propertyLabels] || [];
+        let value = element[key as keyof ChemicalElement];
+
+        if (typeof value === 'number') {
+          value = value.toLocaleString();
+        }
+
+        return [label, `${value} ${unit}`];
+      });
+  }, [element]);
 
   return (
     <div className="mx-auto max-w-6xl">
@@ -39,8 +58,9 @@ function ElementPage({ params }: { params: { slug: string } }) {
             </a>
           </p>
         </div>
+
         <div className="col-span-1">
-          <figure className="relative overflow-hidden w-52 h-52 self-baseline">
+          <figure className="relative rounded-md overflow-hidden w-52 h-52 self-baseline">
             <Image
               src={element.image.url}
               alt={element.image.attribution}
@@ -54,44 +74,13 @@ function ElementPage({ params }: { params: { slug: string } }) {
         </div>
       </section>
 
-      <section className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-12">
-        <div className="col-span-4">
-          <p className="text-2xl font-bold">General Information</p>
-          <div className="grid grid-cols-2 gap-4 mt-4">
-            <div>
-              <p className="font-bold">Symbol</p>
-              <p>{element.symbol}</p>
-            </div>
-            <div>
-              <p className="font-bold">Atomic Number</p>
-              <p>{element.number}</p>
-            </div>
-            <div>
-              <p className="font-bold">Atomic Mass</p>
-              <p>{element.atomic_mass}</p>
-            </div>
-            <div>
-              <p className="font-bold">Electron Configuration</p>
-              <p>{element.electron_configuration}</p>
-            </div>
-            <div>
-              <p className="font-bold">Electron Configuration (Short)</p>
-              <p>{element.electron_configuration_semantic}</p>
-            </div>
-            <div>
-              <p className="font-bold">Electron Affinity</p>
-              <p>{element.electron_affinity}</p>
-            </div>
-            <div>
-              <p className="font-bold">Electronegativity</p>
-              <p>{element.electronegativity_pauling}</p>
-            </div>
-            <div>
-              <p className="font-bold">Ionization Energy</p>
-              <p>{element.ionization_energies}</p>
-            </div>
+      <section className="grid grid-cols-2 md:grid-cols-5 gap-4 mt-12 rounded-lg bg-slate-700">
+        {elementProperties.map(([label, value], idx) => (
+          <div className="text-center grid place-content-center p-2" key={idx}>
+            <p className="text-2xl font-bold">{value}</p>
+            <p className="text-lg">{label}</p>
           </div>
-        </div>
+        ))}
       </section>
 
       <div className="grid grid-cols-8 gap-2">
