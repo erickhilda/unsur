@@ -31,6 +31,7 @@ function generateColorBasedOnCategory(category: string) {
 function ElementTile({ element }: { element: ChemicalElement }) {
   return (
     <Link
+      prefetch
       href={`/${element.name.toLowerCase().replace(/ /g, '-')}`}
       className={`rounded-sm aspect-w-1 aspect-h-1 relative hover:shadow-sm ${generateColorBasedOnCategory(
         element.category
