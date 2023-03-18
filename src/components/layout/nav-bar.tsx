@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Icon from '../general/Icon';
+import Icon from '../general/icon';
 
 function NavBar() {
   return (

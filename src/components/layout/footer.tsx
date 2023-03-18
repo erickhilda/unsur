@@ -1,7 +1,7 @@
 import { ChemicalElement } from '@/types/global';
 
 import ElementTile from '../element-tile';
-import Icon from '../general/Icon';
+import Icon from '../general/icon';
 
 interface FooterProps {
   previousElement: ChemicalElement;
