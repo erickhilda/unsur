@@ -1,11 +1,12 @@
-import BohrAtom from '@/components/bohr-atom';
+import { useMemo } from 'react';
+import Image from 'next/image';
+
+import BohrAtom from '@/components/atom/bohr-atom';
+import ModelWrapper from '@/components/atom/model-wrapper';
 import ScatterPlot from '@/components/scatter-plot';
 import element_data from '@/data/elemens-data';
 import { propertyLabels } from '@/data/label';
 import { ChemicalElement } from '@/types/global';
-import Image from 'next/image';
-
-import { useMemo } from 'react';
 
 function getElementDetails(slug: string) {
   return element_data.find(
@@ -83,19 +84,18 @@ function ElementPage({ params }: { params: { slug: string } }) {
         ))}
       </section>
 
-      <div className="grid grid-cols-8 gap-2">
-        <div className="col-span-2">
-          <BohrAtom
+      <section className="grid grid-cols-8 gap-2">
+        <div className="col-span-3 min-h-[300px]">
+          {/* <BohrAtom
             shells={element.shells}
             symbol={element.symbol}
             orbitalPeriod={4}
             className="h-full w-full overflow-visible"
-          />
+          /> */}
+          <ModelWrapper modelUrl={element.bohr_model_3d} />
         </div>
-        <div className="col-span-6">
-          <ScatterPlot />
-        </div>
-      </div>
+        <div className="col-span-5">{/* <ScatterPlot /> */}</div>
+      </section>
     </div>
   );
 }

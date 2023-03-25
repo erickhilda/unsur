@@ -12,12 +12,12 @@ function Footer({ previousElement, nextElement }: FooterProps) {
   return (
     <footer className="mt-10 mx-auto max-w-6xl">
       <div className="flex justify-between">
-        <button className="flex py-2 items-center gap-1 uppercase">
+        <button className="flex py-2 items-center gap-1 uppercase cursor-default">
           <Icon icon="ph:arrow-left" width={20} height={20} />
           prev
         </button>
 
-        <button className="flex py-2 items-center gap-1 uppercase">
+        <button className="flex py-2 items-center gap-1 uppercase cursor-default">
           next
           <Icon icon="ph:arrow-right" width={20} height={20} />
         </button>
