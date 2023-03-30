@@ -12,7 +12,32 @@ export const categories = [
   'transition metal',
 ] as const;
 
-export const propertyLabels: Partial<
+export const lantinideAndAntinide: Partial<ChemicalElement>[] = [
+  {
+    name: 'Lanthanide',
+    row: 6,
+    column: 3,
+    category: 'lanthanide',
+    number: '57-71',
+  },
+  {
+    name: 'Actinide',
+    row: 7,
+    column: 3,
+    category: 'actinide',
+    number: '89-103',
+  },
+];
+
+export const briefPropertyLabels: Partial<
+  Record<keyof ChemicalElement, [string, string]>
+> = {
+  atomic_mass: ['Atomic Mass', 'u'],
+  atomic_radius: ['Atomic Radius', 'pm'],
+  density: ['Density', 'g/cm³'],
+};
+
+export const detailsPropertyLabels: Partial<
   Record<keyof ChemicalElement, [string, string]>
 > = {
   atomic_mass: ['Atomic Mass', 'u'],

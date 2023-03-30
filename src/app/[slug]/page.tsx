@@ -5,7 +5,7 @@ import BohrAtom from '@/components/atom/bohr-atom';
 import ModelWrapper from '@/components/atom/model-wrapper';
 import ScatterPlot from '@/components/scatter-plot';
 import element_data from '@/data/elemens-data';
-import { propertyLabels } from '@/data/label';
+import { detailsPropertyLabels } from '@/data/label';
 import { ChemicalElement } from '@/types/global';
 
 function getElementDetails(slug: string) {
@@ -18,11 +18,12 @@ function ElementPage({ params }: { params: { slug: string } }) {
   const element = getElementDetails(params.slug);
 
   const elementProperties = useMemo(() => {
-    return Object.keys(propertyLabels)
+    return Object.keys(detailsPropertyLabels)
       .filter((key) => element[key as keyof ChemicalElement])
       .map((key) => {
         const [label, unit] =
-          propertyLabels[key as keyof typeof propertyLabels] || [];
+          detailsPropertyLabels[key as keyof typeof detailsPropertyLabels] ||
+          [];
         let value = element[key as keyof ChemicalElement];
 
         if (typeof value === 'number') {
