@@ -6,13 +6,7 @@ import ElementTile from '@/components/element-tile';
 import PeriodicTable from '@/components/periodic-table';
 import element_data from '@/data/elemens-data';
 import { ChemicalElement } from '@/types/global';
-
-const propertyLabels: Partial<Record<keyof ChemicalElement, [string, string]>> =
-  {
-    atomic_mass: ['Atomic Mass', 'u'],
-    atomic_radius: ['Atomic Radius', 'pm'],
-    density: ['Density', 'g/cm³'],
-  };
+import { briefPropertyLabels, lantinideAndAntinide } from '@/data/label';
 
 export default function Home() {
   const [element, setElement] = useState<ChemicalElement | null>(null);
@@ -22,11 +16,11 @@ export default function Home() {
       return [];
     }
 
-    return Object.keys(propertyLabels)
+    return Object.keys(briefPropertyLabels)
       .filter((key) => element[key as keyof ChemicalElement])
       .map((key) => {
         const [label, unit] =
-          propertyLabels[key as keyof typeof propertyLabels] || [];
+          briefPropertyLabels[key as keyof typeof briefPropertyLabels] || [];
         let value = element[key as keyof ChemicalElement];
 
         if (typeof value === 'number') {
@@ -73,6 +67,17 @@ export default function Home() {
               gridArea: `${el.row} / ${el.column} / auto / auto`,
             }}
             onHover={() => setElement(el)}
+          />
+        ))}
+        {lantinideAndAntinide.map((el) => (
+          <ElementTile
+            key={el.name}
+            element={el}
+            style={{
+              gridArea: `${el.row} / ${el.column} / auto / auto`,
+              cursor: 'not-allowed',
+            }}
+            onHover={() => {}}
           />
         ))}
       </PeriodicTable>

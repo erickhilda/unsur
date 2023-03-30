@@ -3,48 +3,61 @@ import Link from 'next/link';
 
 import { ChemicalElement } from '@/types/global';
 
+// make teh color a bit more pastel
 function generateColorBasedOnCategory(category: string) {
   switch (category) {
     case 'alkali metal':
-      return 'bg-red-700';
+      return 'bg-red-400';
     case 'alkaline earth metal':
-      return 'bg-red-500';
+      return 'bg-red-200';
     case 'transition metal':
-      return 'bg-yellow-700';
+      return 'bg-yellow-400';
     case 'post-transition metal':
-      return 'bg-yellow-500';
+      return 'bg-yellow-200';
     case 'metalloid':
-      return 'bg-green-700';
+      return 'bg-green-400';
     case 'diatomic nonmetal':
-      return 'bg-green-500';
+      return 'bg-green-200';
     case 'polyatomic nonmetal':
-      return 'bg-blue-700';
+      return 'bg-blue-400';
     case 'noble gas':
-      return 'bg-violet-700';
+      return 'bg-violet-400';
     case 'lanthanide':
-      return 'bg-teal-700';
+      return 'bg-teal-400';
     case 'actinide':
-      return 'bg-teal-500';
+      return 'bg-teal-200';
     default:
-      return 'bg-gray-900';
+      return 'bg-gray-600';
   }
 }
 
+// make the element to receive partial type of ChemicalElement
 function ElementTile({
   element,
   style,
   onHover,
+  className,
 }: {
-  element: ChemicalElement;
-  style: React.CSSProperties;
+  element: Partial<ChemicalElement>;
+  style?: React.CSSProperties;
   onHover?: () => void;
+  className?: string;
 }) {
+  const isLantinideOrActinide =
+    element.name === 'Lanthanide' || element.name === 'Actinide';
+  const redirectUrl = () => {
+    if (isLantinideOrActinide) {
+      return '/';
+    }
+
+    return `/${element.name?.toLowerCase().replace(/ /g, '-')}`;
+  };
   return (
     <Link
-      href={`/${element.name.toLowerCase().replace(/ /g, '-')}`}
-      className={`rounded-sm aspect-w-1 aspect-h-1 relative hover:shadow-sm ${generateColorBasedOnCategory(
-        element.category
-      )} hover:opacity-80`}
+      href={redirectUrl()}
+      className={`rounded-sm aspect-w-1 aspect-h-1 relative hover:shadow-sm hover:opacity-80 ${generateColorBasedOnCategory(
+        element.category || ''
+      )} ${className}`}
       style={style}
       onMouseEnter={onHover}
     >

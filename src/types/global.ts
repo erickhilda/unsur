@@ -34,7 +34,7 @@ export type ChemicalElement = {
   natural: boolean | null;
   nonmetal: boolean | null;
   number_of_isotopes: number | null;
-  number: number;
+  number: number | string;
   period: number;
   phase: 'Gas' | 'Liquid' | 'Solid';
   radioactive: boolean | null;
