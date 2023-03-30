@@ -36,10 +36,12 @@ function ElementTile({
   element,
   style,
   onHover,
+  className,
 }: {
   element: Partial<ChemicalElement>;
-  style: React.CSSProperties;
+  style?: React.CSSProperties;
   onHover?: () => void;
+  className?: string;
 }) {
   const isLantinideOrActinide =
     element.name === 'Lanthanide' || element.name === 'Actinide';
@@ -53,9 +55,9 @@ function ElementTile({
   return (
     <Link
       href={redirectUrl()}
-      className={`rounded-sm aspect-w-1 aspect-h-1 relative hover:shadow-sm ${generateColorBasedOnCategory(
+      className={`rounded-sm aspect-w-1 aspect-h-1 relative hover:shadow-sm hover:opacity-80 ${generateColorBasedOnCategory(
         element.category || ''
-      )} hover:opacity-80`}
+      )} ${className}`}
       style={style}
       onMouseEnter={onHover}
     >

@@ -35,14 +35,14 @@ function ElementPage({ params }: { params: { slug: string } }) {
   }, [element]);
 
   return (
-    <div className="mx-auto max-w-6xl">
-      <h1 className="text-center text-5xl leading-normal font-bold">
+    <div className="mx-auto max-w-xs lg:max-w-6xl">
+      <h1 className="text-center lg:text-5xl text-3xl leading-normal font-bold">
         {`${element.number} - ${element.name}`}{' '}
         <span className="font-light text-gray-500">({element.category})</span>
       </h1>
 
-      <section className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-12">
-        <div className="col-span-3">
+      <section className="grid grid-cols-1 lg:grid-cols-4 gap-4 mt-12">
+        <div className="lg:col-span-3 col-span-1">
           <p className="text-2xl font-bold">Description</p>
           <p className="text-lg mt-4">
             Discover by <b>{element.discoverer}</b> in {element.year}.
@@ -61,8 +61,9 @@ function ElementPage({ params }: { params: { slug: string } }) {
           </p>
         </div>
 
+        {/* cnter the content inside grid */}
         <div className="col-span-1">
-          <figure className="relative rounded-md overflow-hidden w-52 h-52 self-baseline">
+          <figure className="relative rounded-md overflow-hidden w-52 h-52 self-baseline mx-auto">
             <Image
               src={element.image.url}
               alt={element.image.attribution}
@@ -76,17 +77,17 @@ function ElementPage({ params }: { params: { slug: string } }) {
         </div>
       </section>
 
-      <section className="grid grid-cols-2 md:grid-cols-5 gap-4 mt-12 rounded-lg bg-slate-700">
+      <section className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-12 rounded-lg shadow-lg ring-1 ring-slate-100">
         {elementProperties.map(([label, value], idx) => (
           <div className="text-center grid place-content-center p-2" key={idx}>
-            <p className="text-2xl font-bold">{value}</p>
-            <p className="text-lg">{label}</p>
+            <p className="lg:text-2xl text-lg font-bold">{value}</p>
+            <p className="lg:text-lg text-sm">{label}</p>
           </div>
         ))}
       </section>
 
-      <section className="grid grid-cols-8 gap-2">
-        <div className="col-span-3 min-h-[300px]">
+      <section className="grid lg:grid-cols-8 grid-cols-1 lg:gap-2 mt-12">
+        <div className="lg:col-span-3 col-span-1 min-h-[300px]">
           {/* <BohrAtom
             shells={element.shells}
             symbol={element.symbol}
