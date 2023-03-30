@@ -33,9 +33,11 @@ function generateColorBasedOnCategory(category: string) {
 function ElementTile({
   element,
   style,
+  onHover,
 }: {
   element: ChemicalElement;
   style: React.CSSProperties;
+  onHover?: () => void;
 }) {
   return (
     <Link
@@ -44,12 +46,16 @@ function ElementTile({
         element.category
       )} hover:opacity-80`}
       style={style}
+      onMouseEnter={onHover}
     >
-      <span className="text-xs absolute left-1 top-1">{element.number}</span>
+      <span className="text-xxxxs lg:text-xxxs absolute lg:left-1 lg:top-1 left-[1px] top-[1px]">
+        {element.number}
+      </span>
+
       <span className="flex flex-col justify-center items-center text-center">
-        <h2 className="text-lg font-semibold">{element.symbol}</h2>
-        <p className="text-xs">{element.name}</p>
-        <p className="text-xxxs">{element.category}</p>
+        <h2 className="lg:text-lg text-xxxs font-semibold">{element.symbol}</h2>
+        <p className="lg:text-xxxs font-bold hidden lg:block">{element.name}</p>
+        <p className="lg:text-xxxs hidden lg:block">{element.category}</p>
       </span>
     </Link>
   );
