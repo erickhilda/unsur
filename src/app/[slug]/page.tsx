@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import Image from 'next/image';
 
 import BohrAtom from '@/components/atom/bohr-atom';
@@ -7,6 +6,7 @@ import ScatterPlot from '@/components/scatter-plot';
 import element_data from '@/data/elemens-data';
 import { detailsPropertyLabels } from '@/data/label';
 import { ChemicalElement } from '@/types/global';
+import useElementProperties from '@/hooks/useElementProperties';
 
 function getElementDetails(slug: string) {
   return element_data.find(
@@ -17,22 +17,10 @@ function getElementDetails(slug: string) {
 function ElementPage({ params }: { params: { slug: string } }) {
   const element = getElementDetails(params.slug);
 
-  const elementProperties = useMemo(() => {
-    return Object.keys(detailsPropertyLabels)
-      .filter((key) => element[key as keyof ChemicalElement])
-      .map((key) => {
-        const [label, unit] =
-          detailsPropertyLabels[key as keyof typeof detailsPropertyLabels] ||
-          [];
-        let value = element[key as keyof ChemicalElement];
-
-        if (typeof value === 'number') {
-          value = value.toLocaleString();
-        }
-
-        return [label, `${value} ${unit}`];
-      });
-  }, [element]);
+  const elementProperties = useElementProperties({
+    properties: detailsPropertyLabels,
+    element,
+  });
 
   return (
     <div className="mx-auto max-w-xs lg:max-w-6xl">

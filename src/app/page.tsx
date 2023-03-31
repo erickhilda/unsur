@@ -1,35 +1,21 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 
 import ElementTile from '@/components/element-tile';
 import PeriodicTable from '@/components/periodic-table';
 import element_data from '@/data/elemens-data';
 import { ChemicalElement } from '@/types/global';
 import { briefPropertyLabels, lantinideAndAntinide } from '@/data/label';
+import useElementProperties from '@/hooks/useElementProperties';
 
 export default function Home() {
   const [element, setElement] = useState<ChemicalElement | null>(null);
 
-  const elementProperties = useMemo(() => {
-    if (!element) {
-      return [];
-    }
-
-    return Object.keys(briefPropertyLabels)
-      .filter((key) => element[key as keyof ChemicalElement])
-      .map((key) => {
-        const [label, unit] =
-          briefPropertyLabels[key as keyof typeof briefPropertyLabels] || [];
-        let value = element[key as keyof ChemicalElement];
-
-        if (typeof value === 'number') {
-          value = value.toLocaleString();
-        }
-
-        return [label, `${value} ${unit}`];
-      });
-  }, [element]);
+  const elementProperties = useElementProperties({
+    properties: briefPropertyLabels,
+    element,
+  });
 
   return (
     <main className="m-4">
