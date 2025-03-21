@@ -15,20 +15,20 @@ function BohrAtom({
 
   const nucleusProps = {
     r: 15,
-    fill: 'white',
+    fill: 'gray',
   };
 
   const shellProps = {
     fill: 'none',
-    stroke: 'white',
+    stroke: 'gray',
     strokeWidth: 1,
   };
 
   const electronProps = {
     r: 3,
     fill: 'blue',
-    stroke: 'white',
-    strokeWidth: 1,
+    stroke: 'black',
+    strokeWidth: 0.5,
   };
 
   return (
@@ -39,7 +39,9 @@ function BohrAtom({
     >
       {/* nucleus */}
       <circle {...nucleusProps} />
-
+      <text style={{ textAnchor: 'middle', dominantBaseline: 'central' }}>
+        {symbol}
+      </text>
       {/* electron orbotals */}
       {shells.map((electrons, shell_idx) => {
         const n = shell_idx + 1;
@@ -64,10 +66,10 @@ function BohrAtom({
                 return (
                   <circle
                     key={elec_idx}
-                    className="electron"
                     cx={elec_x}
                     cy={elec_y}
                     {...electronProps}
+                    className="electron"
                   >
                     <title>{`Electron ${elec_idx + 1}`}</title>
                   </circle>
