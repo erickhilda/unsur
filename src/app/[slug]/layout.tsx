@@ -24,11 +24,18 @@ export function generateMetadata({
 function getNextElement(element: ChemicalElement) {
   const index = element_data.indexOf(element);
 
+  if (index === element_data.length - 1) {
+    return null;
+  }
   return element_data[index + 1];
 }
 
 function getPreviousElement(element: ChemicalElement) {
   const index = element_data.indexOf(element);
+
+  if (index === 0) {
+    return null;
+  }
 
   return element_data[index - 1];
 }
