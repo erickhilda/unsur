@@ -13,7 +13,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="container mx-auto bg-slate-50">{children}</body>
+      <body className="container mx-auto bg-zinc-50">{children}</body>
     </html>
   );
 }
