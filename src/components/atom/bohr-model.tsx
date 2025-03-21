@@ -28,7 +28,7 @@ export default function BohrModel({ modelUrl, ...props }: BohrModelProps) {
   useEffect(() => {
     actions[names[0]]?.reset().fadeIn(0.5).play();
 
-    // return () => actions[names[0]]?.fadeOut(0.5);
+    // return () => actions[names[0]]?.fadeOut(0.5).stop();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
