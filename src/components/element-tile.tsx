@@ -70,7 +70,9 @@ function ElementTile({
 
       <span className="flex flex-col justify-center items-center text-center">
         <h2 className="lg:text-lg text-xs font-semibold">{element.symbol}</h2>
-        <p className="text-xxxxs lg:font-bold lg:block">{element.name}</p>
+        <p className="text-xxxxs lg:text-xxxs lg:font-bold lg:block">
+          {element.name}
+        </p>
         {/* <p className="lg:text-xxxs hidden lg:block">{element.category}</p> */}
       </span>
     </Link>
