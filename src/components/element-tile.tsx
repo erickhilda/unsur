@@ -19,6 +19,8 @@ function generateColorBasedOnCategory(category: string) {
     case 'diatomic nonmetal':
       return 'bg-green-200';
     case 'polyatomic nonmetal':
+    // added for data-v2 compatibility
+    case 'nonmetal':
       return 'bg-blue-400';
     case 'noble gas':
       return 'bg-violet-400';
@@ -26,8 +28,9 @@ function generateColorBasedOnCategory(category: string) {
       return 'bg-teal-400';
     case 'actinide':
       return 'bg-teal-200';
+    case 'unknown':
     default:
-      return 'bg-gray-600';
+      return 'bg-gray-300';
   }
 }
 

@@ -3,13 +3,16 @@ export const categories = [
   'actinide',
   'alkali metal',
   'alkaline earth metal',
-  'diatomic nonmetal',
   'lanthanide',
   'metalloid',
   'noble gas',
+  'diatomic nonmetal',
   'polyatomic nonmetal',
   'post-transition metal',
   'transition metal',
+  // added for data-v2 compatibility
+  'nonmetal',
+  'unknown',
 ] as const;
 
 export const lantinideAndAntinide: Partial<ChemicalElement>[] = [
