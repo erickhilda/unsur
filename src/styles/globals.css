@@ -1,3 +1,28 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.debug {
+  @apply border border-red-500;
+}
+
+@layer base {
+  .periodic-table-grid {
+    display: grid;
+    grid-template-columns: repeat(18, minmax(60px, 60px));
+    grid-auto-rows: minmax(60px, auto);
+    overflow-x: auto;
+    width: 100%;
+    padding-bottom: 20px;
+  }
+}
+.element {
+  min-width: 30px;
+}
+
+@media (max-width: 600px) {
+  .periodic-table-grid {
+    grid-template-columns: repeat(18, 40px);
+    grid-auto-rows: minmax(40px, auto);
+  }
+}

@@ -4,7 +4,7 @@ import { useState, useMemo } from 'react';
 
 import ElementTile from '@/components/element-tile';
 import PeriodicTable from '@/components/periodic-table';
-import element_data from '@/data/elemens-data';
+import element_data from '@/data/elemens-data-v2';
 import { ChemicalElement } from '@/types/global';
 import { briefPropertyLabels, lantinideAndAntinide } from '@/data/label';
 
