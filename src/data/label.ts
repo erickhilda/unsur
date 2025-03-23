@@ -11,7 +11,7 @@ export const categories = [
   'post-transition metal',
   'transition metal',
   // added for data-v2 compatibility
-  'nonmetal',
+  'reactive nonmetal',
   'unknown',
 ] as const;
 
