@@ -58,20 +58,20 @@ function ElementTile({
   return (
     <Link
       href={redirectUrl()}
-      className={`rounded-sm aspect-w-1 aspect-h-1 relative hover:shadow-sm hover:opacity-80 ${generateColorBasedOnCategory(
+      className={`rounded-md aspect-w-1 aspect-h-1 relative hover:shadow-sm hover:opacity-80 ${generateColorBasedOnCategory(
         element.category || ''
       )} ${className}`}
       style={style}
       onMouseEnter={onHover}
     >
-      <span className="text-xxxxs lg:text-xxxs absolute lg:left-1 lg:top-1 left-[1px] top-[1px]">
+      <span className="text-xxxxs lg:text-xxxs absolute lg:left-1 lg:top-1 left-[2px] top-[2px]">
         {element.number}
       </span>
 
       <span className="flex flex-col justify-center items-center text-center">
-        <h2 className="lg:text-lg text-xxxs font-semibold">{element.symbol}</h2>
-        <p className="lg:text-xxxs font-bold hidden lg:block">{element.name}</p>
-        <p className="lg:text-xxxs hidden lg:block">{element.category}</p>
+        <h2 className="lg:text-lg text-xs font-semibold">{element.symbol}</h2>
+        <p className="text-xxxxs lg:font-bold lg:block">{element.name}</p>
+        {/* <p className="lg:text-xxxs hidden lg:block">{element.category}</p> */}
       </span>
     </Link>
   );
