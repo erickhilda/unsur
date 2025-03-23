@@ -73,7 +73,7 @@ function ElementTile({
         <p className="text-xxxxs lg:text-xxxs lg:font-bold lg:block">
           {element.name}
         </p>
-        {/* <p className="lg:text-xxxs hidden lg:block">{element.category}</p> */}
+        <p className="lg:text-xxxs hidden lg:block">{element.category}</p>
       </span>
     </Link>
   );
