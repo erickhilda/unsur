@@ -1,9 +1,7 @@
 import { useMemo } from 'react';
 import Image from 'next/image';
 
-import BohrAtom from '@/components/atom/bohr-atom';
 import ModelWrapper from '@/components/atom/model-wrapper';
-import ScatterPlot from '@/components/scatter-plot';
 import element_data from '@/data/elemens-data';
 import { detailsPropertyLabels } from '@/data/label';
 import { ChemicalElement } from '@/types/global';

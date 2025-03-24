@@ -1,7 +1,7 @@
 import { ChemicalElement } from '@/types/global';
 
-import ElementTile from '../element-tile';
-import Icon from '../general/icon';
+import ElementTile from '../periodic-table/element-tile';
+import Icon from '../ui/icon';
 
 interface FooterProps {
   previousElement: ChemicalElement | null;
@@ -10,7 +10,7 @@ interface FooterProps {
 
 function Footer({ previousElement, nextElement }: FooterProps) {
   return (
-    <footer className="mt-10 mx-auto max-w-xs lg:max-w-6xl">
+    <footer className="mt-10 mx-auto w-full lg:max-w-6xl">
       <div className="flex justify-between">
         {previousElement ? (
           <button className="flex py-2 items-center gap-1 uppercase cursor-default">
