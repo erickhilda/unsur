@@ -32,17 +32,10 @@ export const lantinideAndAntinide: Partial<ChemicalElement>[] = [
   },
 ];
 
-export const briefPropertyLabels: Partial<
-  Record<keyof ChemicalElement, [string, string]>
-> = {
-  atomic_mass: ['Atomic Mass', 'u'],
-  atomic_radius: ['Atomic Radius', 'pm'],
-  density: ['Density', 'g/cm³'],
-};
-
 export const detailsPropertyLabels: Partial<
   Record<keyof ChemicalElement, [string, string]>
 > = {
+  category: ['Category', ''],
   atomic_mass: ['Atomic Mass', 'u'],
   atomic_radius: ['Atomic Radius', 'pm'],
   boiling_point: ['Boiling Point', 'K'],
@@ -56,4 +49,7 @@ export const detailsPropertyLabels: Partial<
   n_valence: ['Electron valency', ''],
   shells: ['Shells ocupation', ''],
   specific_heat: ['Specific Heat', 'J/(g·K)'],
+  discoverer: ['Discover by', ''],
+  year: ['Year of Discovery', ''],
+  image: ['Image', ''],
 };

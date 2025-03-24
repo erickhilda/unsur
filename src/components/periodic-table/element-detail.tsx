@@ -1,10 +1,11 @@
 'use client';
 
 import { useSidebar } from '@/components/ui/sidebar';
-import { briefPropertyLabels } from '@/data/label';
+import { detailsPropertyLabels } from '@/data/label';
 import { useMemo } from 'react';
-import element_data from '@/data/elemens-data-v2';
 import { ChemicalElement } from '@/types/global';
+import { ElementTileDetail } from './element-tile-detail';
+import { DetailImageRows, DetailRows } from './detail-rows';
 
 function ElementDetail() {
   const { element } = useSidebar();
@@ -14,22 +15,60 @@ function ElementDetail() {
       return [];
     }
 
-    return Object.keys(briefPropertyLabels)
-      .filter((key) => element[key as keyof ChemicalElement])
-      .map((key) => {
-        const [label, unit] =
-          briefPropertyLabels[key as keyof typeof briefPropertyLabels] || [];
-        let value = element[key as keyof ChemicalElement];
+    return Object.keys(detailsPropertyLabels).map((key) => {
+      const [label, unit] =
+        detailsPropertyLabels[key as keyof typeof detailsPropertyLabels] || [];
+      let value = element[key as keyof ChemicalElement];
 
-        if (typeof value === 'number') {
-          value = value.toLocaleString();
-        }
+      if (key === 'image') {
+        return { key, label, value, element: element.name.toLowerCase() };
+      }
+      if (typeof value === 'number') {
+        value = value.toString();
+      }
 
-        return [label, `${value} ${unit}`];
-      });
+      return {
+        key,
+        label,
+        value: `${value ?? '-'} ${unit}`,
+        element: element.name.toLowerCase().replace(/ /g, '-'),
+      };
+    });
   }, [element]);
 
-  return <pre>{JSON.stringify(element, null, 2)}</pre>;
+  if (!element) {
+    return null;
+  }
+  return (
+    <div className="w-full max-w-md">
+      <div className="flex flex-col justify-center">
+        <ElementTileDetail
+          symbol={element.symbol}
+          name={element.name}
+          atomicNumber={element.number as number}
+          atomicMass={element.atomic_mass}
+          category={element.category}
+          source={element.source}
+        />
+        <div className="mt-2">
+          {elementProperties.length &&
+            elementProperties.map((p) => {
+              if (p.key === 'image') {
+                return <DetailImageRows image={p.value} />;
+              } else {
+                return (
+                  <DetailRows
+                    key={`${p.element}-${p.key}`}
+                    label={p.label}
+                    value={p.value}
+                  />
+                );
+              }
+            })}
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default ElementDetail;
