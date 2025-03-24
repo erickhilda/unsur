@@ -1,5 +1,4 @@
 import React from 'react';
-import Link from 'next/link';
 
 import { ChemicalElement } from '@/types/global';
 
@@ -39,11 +38,13 @@ function ElementTile({
   element,
   style,
   onHover,
+  onClick,
   className,
 }: {
   element: Partial<ChemicalElement>;
   style?: React.CSSProperties;
   onHover?: () => void;
+  onClick?: () => void;
   className?: string;
 }) {
   const isLantinideOrActinide =
@@ -55,14 +56,15 @@ function ElementTile({
 
     return `/${element.name?.toLowerCase().replace(/ /g, '-')}`;
   };
+
   return (
-    <Link
-      href={redirectUrl()}
+    <div
       className={`rounded-md aspect-w-1 aspect-h-1 relative hover:shadow-sm hover:opacity-80 ${generateColorBasedOnCategory(
         element.category || ''
       )} ${className}`}
       style={style}
       onMouseEnter={onHover}
+      onClick={onClick}
     >
       <span className="text-xxxxs lg:text-xxxs absolute lg:left-1 lg:top-1 left-[2px] top-[2px]">
         {element.number}
@@ -75,7 +77,7 @@ function ElementTile({
         </p>
         <p className="lg:text-xxxs hidden lg:block">{element.category}</p>
       </span>
-    </Link>
+    </div>
   );
 }
 

@@ -2,8 +2,8 @@
 
 import { useState, useMemo } from 'react';
 
-import ElementTile from '@/components/element-tile';
-import PeriodicTable from '@/components/periodic-table';
+import ElementTile from '@/components/periodic-table/element-tile';
+import PeriodicTable from '@/components/periodic-table/periodic-table';
 import element_data from '@/data/elemens-data-v2';
 import { ChemicalElement } from '@/types/global';
 import { briefPropertyLabels, lantinideAndAntinide } from '@/data/label';
@@ -33,10 +33,6 @@ export default function Home() {
 
   return (
     <main className="m-4">
-      <h1 className="text-center lg:text-5xl text-lg font-bold my-4">
-        Tabel Periodik Unsur
-      </h1>
-
       <PeriodicTable>
         {element && (
           <div className="grid grid-cols-3 row-span-3 col-span-10">
