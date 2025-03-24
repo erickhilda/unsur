@@ -54,13 +54,18 @@ function ElementDetail() {
           {elementProperties.length &&
             elementProperties.map((p) => {
               if (p.key === 'image') {
-                return <DetailImageRows image={p.value} />;
+                return (
+                  <DetailImageRows
+                    key={`${p.element}-${p.key}`}
+                    image={p.value as ChemicalElement['image']}
+                  />
+                );
               } else {
                 return (
                   <DetailRows
                     key={`${p.element}-${p.key}`}
-                    label={p.label}
-                    value={p.value}
+                    label={p.label as keyof ChemicalElement}
+                    value={p.value as string}
                   />
                 );
               }
