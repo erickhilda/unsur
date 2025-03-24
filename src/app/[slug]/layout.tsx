@@ -56,7 +56,6 @@ export default function ElementLayout({
 
   return (
     <>
-      <NavBar />
       {children}
       <Footer nextElement={nextElement} previousElement={previousElement} />
     </>

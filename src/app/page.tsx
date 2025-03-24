@@ -1,15 +1,16 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useMemo } from 'react';
 
 import ElementTile from '@/components/periodic-table/element-tile';
 import PeriodicTable from '@/components/periodic-table/periodic-table';
 import element_data from '@/data/elemens-data-v2';
 import { ChemicalElement } from '@/types/global';
 import { briefPropertyLabels, lantinideAndAntinide } from '@/data/label';
+import { useSidebar } from '@/components/ui/sidebar';
 
 export default function Home() {
-  const [element, setElement] = useState<ChemicalElement | null>(null);
+  const { element, setElement } = useSidebar();
 
   const elementProperties = useMemo(() => {
     if (!element) {
