@@ -100,8 +100,21 @@ const SidebarProvider = React.forwardRef<
       [setOpenProp, open]
     );
 
-    const [_element, _setElement] = React.useState(null);
+    const [_element, _setElement] = React.useState<ChemicalElement | null>(
+      null
+    );
     const element = elementProp ?? _element;
+    const setElement = React.useCallback(
+      (el: ChemicalElement) => {
+        _setElement(el);
+        if (isMobile) {
+          setOpenMobile(true);
+        } else {
+          setOpen(true);
+        }
+      },
+      [isMobile, element, setOpen, setOpenMobile]
+    );
     // Helper to toggle the sidebar.
     const toggleSidebar = React.useCallback(() => {
       return isMobile
@@ -139,7 +152,7 @@ const SidebarProvider = React.forwardRef<
         setOpenMobile,
         toggleSidebar,
         element,
-        setElement: _setElement,
+        setElement,
       }),
       [
         state,
@@ -150,7 +163,7 @@ const SidebarProvider = React.forwardRef<
         setOpenMobile,
         toggleSidebar,
         element,
-        _setElement,
+        setElement,
       ]
     );
 

@@ -20,6 +20,7 @@ export default function Home() {
               gridArea: `${el.row} / ${el.column} / auto / auto`,
             }}
             onHover={() => setElement(el)}
+            onClick={() => setElement(el)}
           />
         ))}
         {lantinideAndAntinide.map((el) => (
