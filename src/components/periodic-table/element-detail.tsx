@@ -1,14 +1,14 @@
 'use client';
 
-import { useSidebar } from '@/components/ui/sidebar';
 import { detailsPropertyLabels } from '@/data/label';
 import { useMemo } from 'react';
 import { ChemicalElement } from '@/types/global';
 import { ElementTileDetail } from './element-tile-detail';
 import { DetailImageRows, DetailRows } from './detail-rows';
+import { useElementStore } from '@/hooks/use-element-store';
 
 function ElementDetail() {
-  const { element } = useSidebar();
+  const { element } = useElementStore();
 
   const elementProperties = useMemo(() => {
     if (!element) {
