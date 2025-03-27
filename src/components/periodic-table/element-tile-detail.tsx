@@ -26,7 +26,7 @@ export function ElementTileDetail({
   return (
     <div
       className={cn(
-        'relative aspect-square w-full max-w-48 p-2 mx-auto mt-2',
+        'relative aspect-square w-52 h-52 p-2 mx-auto mt-2',
         generateColorBasedOnCategory(category),
         className
       )}

@@ -30,7 +30,7 @@ export function DetailImageRows({
   image: ChemicalElement['image'];
 }) {
   return (
-    <div className="border-t border-border p-2">
+    <div className="">
       <figure className="relative rounded-md overflow-hidden w-52 h-52 self-baseline mx-auto">
         <Image
           src={image.url}
