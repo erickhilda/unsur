@@ -1,14 +1,16 @@
 'use client';
 
-import { useSidebar } from '@/components/ui/sidebar';
 import { detailsPropertyLabels } from '@/data/label';
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { ChemicalElement } from '@/types/global';
 import { ElementTileDetail } from './element-tile-detail';
 import { DetailImageRows, DetailRows } from './detail-rows';
+import { useElementStore } from '@/hooks/use-element-store';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs';
+import ModelWrapper from '../atom/model-wrapper';
 
 function ElementDetail() {
-  const { element } = useSidebar();
+  const { element } = useElementStore();
 
   const elementProperties = useMemo(() => {
     if (!element) {
@@ -20,9 +22,6 @@ function ElementDetail() {
         detailsPropertyLabels[key as keyof typeof detailsPropertyLabels] || [];
       let value = element[key as keyof ChemicalElement];
 
-      if (key === 'image') {
-        return { key, label, value, element: element.name.toLowerCase() };
-      }
       if (typeof value === 'number') {
         value = value.toString();
       }
@@ -36,39 +35,67 @@ function ElementDetail() {
     });
   }, [element]);
 
+  const [previewTab, setPreviewTab] = useState('overview');
+
+  useEffect(() => {
+    setPreviewTab('overview');
+  }, [JSON.stringify(element)]);
+
   if (!element) {
     return null;
   }
   return (
     <div className="w-full max-w-md">
       <div className="flex flex-col justify-center">
-        <ElementTileDetail
-          symbol={element.symbol}
-          name={element.name}
-          atomicNumber={element.number as number}
-          atomicMass={element.atomic_mass}
-          category={element.category}
-          source={element.source}
-        />
+        <Tabs defaultValue="overview" value={previewTab} className="!w-full">
+          <TabsList>
+            <TabsTrigger
+              onClick={() => setPreviewTab('overview')}
+              value="overview"
+            >
+              Overview
+            </TabsTrigger>
+            <TabsTrigger
+              value="picture"
+              onClick={() => setPreviewTab('picture')}
+            >
+              Picture
+            </TabsTrigger>
+            <TabsTrigger
+              value="atom-model"
+              onClick={() => setPreviewTab('atom-model')}
+            >
+              Atom Model
+            </TabsTrigger>
+          </TabsList>
+          <TabsContent value="overview">
+            <ElementTileDetail
+              symbol={element.symbol}
+              name={element.name}
+              atomicNumber={element.number as number}
+              atomicMass={element.atomic_mass}
+              category={element.category}
+              source={element.source}
+            />
+          </TabsContent>
+          <TabsContent value="picture">
+            <DetailImageRows image={element.image} />
+          </TabsContent>
+
+          <TabsContent value="atom-model">
+            <ModelWrapper modelUrl={element.bohr_model_3d} />
+          </TabsContent>
+        </Tabs>
         <div className="mt-2">
           {elementProperties.length &&
             elementProperties.map((p) => {
-              if (p.key === 'image') {
-                return (
-                  <DetailImageRows
-                    key={`${p.element}-${p.key}`}
-                    image={p.value as ChemicalElement['image']}
-                  />
-                );
-              } else {
-                return (
-                  <DetailRows
-                    key={`${p.element}-${p.key}`}
-                    label={p.label as keyof ChemicalElement}
-                    value={p.value as string}
-                  />
-                );
-              }
+              return (
+                <DetailRows
+                  key={`${p.element}-${p.key}`}
+                  label={p.label as keyof ChemicalElement}
+                  value={p.value}
+                />
+              );
             })}
         </div>
       </div>

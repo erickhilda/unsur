@@ -51,5 +51,4 @@ export const detailsPropertyLabels: Partial<
   specific_heat: ['Specific Heat', 'J/(g·K)'],
   discoverer: ['Discover by', ''],
   year: ['Year of Discovery', ''],
-  image: ['Image', ''],
 };

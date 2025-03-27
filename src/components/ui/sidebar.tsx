@@ -41,8 +41,6 @@ type SidebarContextProps = {
   setOpenMobile: (open: boolean) => void;
   isMobile: boolean;
   toggleSidebar: () => void;
-  element: ChemicalElement | null;
-  setElement: (data: ChemicalElement) => void;
 };
 
 const SidebarContext = React.createContext<SidebarContextProps | null>(null);
@@ -62,7 +60,6 @@ const SidebarProvider = React.forwardRef<
     defaultOpen?: boolean;
     open?: boolean;
     onOpenChange?: (open: boolean) => void;
-    element?: ChemicalElement | null;
   }
 >(
   (
@@ -73,7 +70,6 @@ const SidebarProvider = React.forwardRef<
       className,
       style,
       children,
-      element: elementProp = null,
       ...props
     },
     ref
@@ -98,22 +94,6 @@ const SidebarProvider = React.forwardRef<
         document.cookie = `${SIDEBAR_COOKIE_NAME}=${openState}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`;
       },
       [setOpenProp, open]
-    );
-
-    const [_element, _setElement] = React.useState<ChemicalElement | null>(
-      null
-    );
-    const element = elementProp ?? _element;
-    const setElement = React.useCallback(
-      (el: ChemicalElement) => {
-        _setElement(el);
-        if (isMobile) {
-          setOpenMobile(true);
-        } else {
-          setOpen(true);
-        }
-      },
-      [isMobile, setOpen, setOpenMobile]
     );
 
     // Helper to toggle the sidebar.
@@ -152,20 +132,8 @@ const SidebarProvider = React.forwardRef<
         openMobile,
         setOpenMobile,
         toggleSidebar,
-        element,
-        setElement,
       }),
-      [
-        state,
-        open,
-        setOpen,
-        isMobile,
-        openMobile,
-        setOpenMobile,
-        toggleSidebar,
-        element,
-        setElement,
-      ]
+      [state, open, setOpen, isMobile, openMobile, setOpenMobile, toggleSidebar]
     );
 
     return (
