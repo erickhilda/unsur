@@ -19,7 +19,6 @@ export default function Home() {
             style={{
               gridArea: `${el.row} / ${el.column} / auto / auto`,
             }}
-            onHover={() => setElement(el)}
             onClick={() => setElement(el)}
           />
         ))}

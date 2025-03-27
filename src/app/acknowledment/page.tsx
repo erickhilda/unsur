@@ -1,5 +1,3 @@
-import NavBar from '@/components/layout/nav-bar';
-
 function Acknowledgement() {
   return (
     <div>

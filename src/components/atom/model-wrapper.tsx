@@ -22,7 +22,7 @@ function ModelWrapper({ modelUrl }: { modelUrl: string }) {
       <OrbitControls
         minPolarAngle={0}
         maxPolarAngle={Math.PI}
-        minDistance={5}
+        minDistance={4}
         maxDistance={8}
         enableDamping
         dampingFactor={0.1}

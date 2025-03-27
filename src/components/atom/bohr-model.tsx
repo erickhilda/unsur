@@ -40,9 +40,11 @@ export default function BohrModel({ modelUrl, ...props }: BohrModelProps) {
       const node = nodes[key];
       if (node.isMesh) {
         node.material = new MeshStandardMaterial({
+          // @ts-expect-error
           color: node.material.color,
           metalness: 0,
           roughness: 0.3,
+          // @ts-expect-error
           specularIntensity: 1,
           specularColor: new Color(0xffffff),
         });
