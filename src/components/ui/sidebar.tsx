@@ -24,7 +24,7 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 import Icon from './icon';
-import { ChemicalElement } from '@/types/global';
+import { usePathname } from 'next/navigation';
 
 const SIDEBAR_COOKIE_NAME = 'sidebar_state';
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
@@ -118,6 +118,15 @@ const SidebarProvider = React.forwardRef<
       window.addEventListener('keydown', handleKeyDown);
       return () => window.removeEventListener('keydown', handleKeyDown);
     }, [toggleSidebar]);
+
+    const pathname = usePathname();
+    React.useEffect(() => {
+      if (pathname.includes('acknowledgment')) {
+        setOpen(false);
+      } else {
+        !isMobile && setOpen(true);
+      }
+    }, [pathname]);
 
     // We add a state so that we can do data-state="expanded" or "collapsed".
     // This makes it easier to style the sidebar with Tailwind classes.
