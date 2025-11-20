@@ -8,10 +8,12 @@
 
 @layer base {
   .periodic-table-grid {
+    --periodic-grid-gap: 0.125rem;
+    --periodic-grid-track-max: 60px;
     display: grid;
     grid-template-columns: repeat(18, minmax(60px, 60px));
     grid-auto-rows: minmax(60px, auto);
-    overflow-x: auto;
+    overflow-x: clip;
     width: 100%;
     padding-bottom: 20px;
   }
@@ -89,6 +91,7 @@
 @media (max-width: 600px) {
   .periodic-table-grid {
     grid-template-columns: repeat(18, 48px);
+    overflow-x: auto;
     grid-auto-rows: minmax(48px, auto);
   }
 }
