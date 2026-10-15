@@ -2,8 +2,8 @@
 module.exports = {
   darkMode: ['class'],
   content: [
-    // Or if using `src` directory:
-    './src/**/*.{js,ts,jsx,tsx}',
+    // Nuxt app dir (post-migration)
+    './app/**/*.{vue,js,ts,jsx,tsx}',
   ],
   theme: {
   	extend: {
