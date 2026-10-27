@@ -3,23 +3,9 @@ import {
   ExternalLink,
   Database,
   Lightbulb,
-  Code,
   Image as ImageIcon,
   Paintbrush,
 } from 'lucide-vue-next';
-
-// Technology data — mencerminkan stack Nuxt (post-migrasi)
-const technologies = [
-  { name: 'Nuxt', description: 'Vue framework with static site generation' },
-  { name: 'Vue 3', description: 'Reactive UI framework' },
-  { name: 'Tailwind CSS', description: 'Styling' },
-  { name: 'shadcn-vue / Reka UI', description: 'UI components & primitives' },
-  { name: 'D3.js', description: 'Data visualization' },
-  { name: 'Three.js', description: '3D graphics' },
-  { name: 'TresJS', description: 'Vue 3D renderer for Three.js' },
-  { name: 'Pinia', description: 'Vue state management' },
-  { name: 'TypeScript', description: 'Type safety' },
-];
 </script>
 
 <template>
@@ -133,24 +119,6 @@ const technologies = [
             </NuxtLink>
             for its clean and modern design and the way it present the data.
           </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Technologies & Libraries -->
-    <section class="space-y-4">
-      <div class="flex items-center gap-2">
-        <Code class="h-5 w-5 text-primary" />
-        <h2 class="text-xl font-semibold">Technologies & Libraries</h2>
-      </div>
-      <div class="grid gap-3 grid-cols-1 sm:grid-cols-2">
-        <div
-          v-for="(tech, index) in technologies"
-          :key="index"
-          class="flex flex-col gap-0.5"
-        >
-          <span class="font-medium">{{ tech.name }}</span>
-          <span class="text-sm text-muted-foreground">{{ tech.description }}</span>
         </div>
       </div>
     </section>
