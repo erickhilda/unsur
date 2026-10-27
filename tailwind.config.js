@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  darkMode: ['class'],
+  darkMode: 'class',
   content: [
     // Nuxt app dir (post-migration)
     './app/**/*.{vue,js,ts,jsx,tsx}',
