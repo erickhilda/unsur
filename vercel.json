@@ -1,0 +1,6 @@
+{
+  "framework": "nuxtjs",
+  "buildCommand": "pnpm run build",
+  "installCommand": "pnpm install",
+  "outputDirectory": ".output/public"
+}
