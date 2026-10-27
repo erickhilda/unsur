@@ -143,14 +143,14 @@ const technologies = [
         <Code class="h-5 w-5 text-primary" />
         <h2 class="text-xl font-semibold">Technologies & Libraries</h2>
       </div>
-      <div class="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+      <div class="grid gap-3 grid-cols-1 sm:grid-cols-2">
         <div
           v-for="(tech, index) in technologies"
           :key="index"
-          class="flex items-center gap-2"
+          class="flex flex-col gap-0.5"
         >
           <span class="font-medium">{{ tech.name }}</span>
-          <span class="text-sm text-muted-foreground">- {{ tech.description }}</span>
+          <span class="text-sm text-muted-foreground">{{ tech.description }}</span>
         </div>
       </div>
     </section>
