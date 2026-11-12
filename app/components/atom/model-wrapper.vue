@@ -14,8 +14,8 @@ defineProps<{
 
 <template>
   <div style="height: 13rem;">
-    <TresCanvas clear-color="transparent">
-      <TresPerspectiveCamera :position="[0, 0, 5]" :fov="75" :look-at="[0, 0, 0]" />
+    <TresCanvas clear-color="transparent" :preserve-drawing-buffer="true">
+      <TresPerspectiveCamera make-default :position="[0, 0, 5]" :fov="75" :look-at="[0, 0, 0]" />
       <TresAmbientLight :intensity="0.7" color="#fff" />
       <TresPointLight :position="[5, 5, 5]" :intensity="1" color="#ffffff" />
       <Suspense>
