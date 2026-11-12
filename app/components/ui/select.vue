@@ -37,18 +37,21 @@ export const Select = defineComponent({
   },
   emits: ['update:modelValue', 'update:open'],
   setup(props, { slots, emit }) {
-    const rootProps: Record<string, unknown> = {
-      defaultValue: props.defaultValue,
-      defaultOpen: props.defaultOpen,
-      name: props.name,
-      disabled: props.disabled,
-      required: props.required,
-      dir: props.dir,
-      'onUpdate:modelValue': (v: string | number) => emit('update:modelValue', v),
-      'onUpdate:open': (v: boolean) => emit('update:open', v),
+    // props dibangun di dalam render agar `open` tidak stale
+    return () => {
+      const rootProps: Record<string, unknown> = {
+        defaultValue: props.defaultValue,
+        defaultOpen: props.defaultOpen,
+        name: props.name,
+        disabled: props.disabled,
+        required: props.required,
+        dir: props.dir,
+        'onUpdate:modelValue': (v: string | number) => emit('update:modelValue', v),
+        'onUpdate:open': (v: boolean) => emit('update:open', v),
+      }
+      if (props.open !== undefined) rootProps.open = props.open
+      return h(RekaSelectRoot, rootProps as never, { default: () => slots.default?.() })
     }
-    if (props.open !== undefined) rootProps.open = props.open
-    return () => h(RekaSelectRoot, rootProps as never, slots.default?.())
   },
 })
 
@@ -154,7 +157,7 @@ export const SelectLabel = defineComponent({
     return () =>
       h(RekaSelectLabel, {
         class: cn('px-2 py-1.5 text-sm font-semibold', props.class),
-      }, slots.default?.())
+      }, { default: () => slots.default?.() })
   },
 })
 
@@ -178,7 +181,7 @@ export const SelectItem = defineComponent({
         default: () => [
           h('span', { class: 'absolute right-2 flex h-3.5 w-3.5 items-center justify-center' }, () =>
             h(RekaSelectItemIndicator, null, () => h(Check, { class: 'h-4 w-4' }))),
-          h(RekaSelectItemText, null, slots.default?.()),
+          h(RekaSelectItemText, null, { default: () => slots.default?.() }),
         ],
       })
   },

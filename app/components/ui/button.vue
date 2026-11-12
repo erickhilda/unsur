@@ -48,7 +48,7 @@ export const Button = defineComponent({
     return () => {
       const cls = cn(buttonVariants({ variant: props.variant, size: props.size }), props.class)
       if (props.asChild) {
-        return h(Slot, { class: cls }, slots.default?.())
+        return h(Slot, { class: cls }, { default: () => slots.default?.() })
       }
       return h('button', { class: cls }, slots.default?.())
     }

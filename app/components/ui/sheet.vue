@@ -47,13 +47,16 @@ export const Sheet = defineComponent({
   },
   emits: ['update:open'],
   setup(props, { slots, emit }) {
-    const rootProps: Record<string, unknown> = {
-      defaultOpen: props.defaultOpen,
-      modal: props.modal,
-      'onUpdate:open': (v: boolean) => emit('update:open', v),
+    // props dibangun di dalam render agar `open` tidak stale
+    return () => {
+      const rootProps: Record<string, unknown> = {
+        defaultOpen: props.defaultOpen,
+        modal: props.modal,
+        'onUpdate:open': (v: boolean) => emit('update:open', v),
+      }
+      if (props.open !== undefined) rootProps.open = props.open
+      return h(RekaDialogRoot, rootProps as never, { default: () => slots.default?.() })
     }
-    if (props.open !== undefined) rootProps.open = props.open
-    return () => h(RekaDialogRoot, rootProps as never, slots.default?.())
   },
 })
 
@@ -144,7 +147,7 @@ export const SheetTitle = defineComponent({
     return () =>
       h(RekaDialogTitle, {
         class: cn('text-lg font-semibold text-foreground', props.class),
-      }, slots.default?.())
+      }, { default: () => slots.default?.() })
   },
 })
 
@@ -157,7 +160,7 @@ export const SheetDescription = defineComponent({
     return () =>
       h(RekaDialogDescription, {
         class: cn('text-sm text-muted-foreground', props.class),
-      }, slots.default?.())
+      }, { default: () => slots.default?.() })
   },
 })
 

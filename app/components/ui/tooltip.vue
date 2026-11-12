@@ -24,15 +24,18 @@ export const Tooltip = defineComponent({
   },
   emits: ['update:open'],
   setup(props, { slots, emit }) {
-    const rootProps: Record<string, unknown> = {
-      defaultOpen: props.defaultOpen,
-      delayDuration: props.delayDuration,
-      disableHoverableContent: props.disableHoverableContent,
-      disableClosingTrigger: props.disableClosingTrigger,
-      'onUpdate:open': (v: boolean) => emit('update:open', v),
+    // props dibangun di dalam render agar `open` tidak stale
+    return () => {
+      const rootProps: Record<string, unknown> = {
+        defaultOpen: props.defaultOpen,
+        delayDuration: props.delayDuration,
+        disableHoverableContent: props.disableHoverableContent,
+        disableClosingTrigger: props.disableClosingTrigger,
+        'onUpdate:open': (v: boolean) => emit('update:open', v),
+      }
+      if (props.open !== undefined) rootProps.open = props.open
+      return h(RekaTooltipRoot, rootProps as never, { default: () => slots.default?.() })
     }
-    if (props.open !== undefined) rootProps.open = props.open
-    return () => h(RekaTooltipRoot, rootProps as never, slots.default?.())
   },
 })
 
@@ -62,7 +65,7 @@ export const TooltipContent = defineComponent({
               'z-50 overflow-hidden rounded-md bg-primary px-3 py-1.5 text-xs text-primary-foreground animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 origin-[--radix-tooltip-content-transform-origin]',
               props.class
             ),
-          }, slots.default?.()),
+          }, { default: () => slots.default?.() }),
       })
   },
 })

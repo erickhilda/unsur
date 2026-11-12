@@ -24,15 +24,19 @@ export const Tabs = defineComponent({
   },
   emits: ['update:modelValue'],
   setup(props, { slots, emit }) {
-    const rootProps: Record<string, unknown> = {
-      defaultValue: props.defaultValue,
-      orientation: props.orientation,
-      dir: props.dir,
-      activationMode: props.activationMode,
-      'onUpdate:modelValue': (v: string) => emit('update:modelValue', v),
+    // rootProps dibangun DI DALAM render function: snapshot di setup membuat
+    // modelValue stale (pernah bikin tab tidak berpindah).
+    return () => {
+      const rootProps: Record<string, unknown> = {
+        defaultValue: props.defaultValue,
+        orientation: props.orientation,
+        dir: props.dir,
+        activationMode: props.activationMode,
+        'onUpdate:modelValue': (v: string) => emit('update:modelValue', v),
+      }
+      if (props.modelValue !== undefined) rootProps.modelValue = props.modelValue
+      return h(RekaTabsRoot, rootProps, { default: () => slots.default?.() })
     }
-    if (props.modelValue !== undefined) rootProps.modelValue = props.modelValue
-    return () => h(RekaTabsRoot, rootProps, slots.default?.())
   },
 })
 
@@ -48,7 +52,7 @@ export const TabsList = defineComponent({
           'inline-flex h-9 items-center justify-center bg-muted text-muted-foreground w-full border-b border-border',
           props.class
         ),
-      }, slots.default?.())
+      }, { default: () => slots.default?.() })
   },
 })
 
@@ -68,7 +72,7 @@ export const TabsTrigger = defineComponent({
           'inline-flex items-center justify-center whitespace-nowrap px-3 w-full h-full text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow',
           props.class
         ),
-      }, slots.default?.())
+      }, { default: () => slots.default?.() })
   },
 })
 
@@ -88,7 +92,7 @@ export const TabsContent = defineComponent({
           'mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
           props.class
         ),
-      }, slots.default?.())
+      }, { default: () => slots.default?.() })
   },
 })
 
