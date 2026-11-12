@@ -32,11 +32,23 @@ const gltf = (await execute(0, props.modelUrl)) as unknown as GLTFResult
 const animations = ref(gltf.animations)
 const { actions } = useAnimations(animations, group as unknown as Ref<Object3D | null>)
 
-const firstName = Object.keys(actions as Record<string, unknown>)[0] as string | undefined
-if (firstName)
+// Paritas R3F "actions[names[0]]?.reset().fadeIn(0.5).play()":
+// actions (shallowReactive) terisi ASINKRON oleh watch flush:'post' di useAnimations —
+// membaca keys seketika di sini selalu kosong. Play saat actions+group siap.
+let animationStarted = false
+function startFirstAnimation() {
+  if (animationStarted) return
+  const firstName = Object.keys(actions as Record<string, unknown>)[0] as string | undefined
+  if (!firstName) return
+  animationStarted = true
   actions[firstName]?.reset().fadeIn(0.5).play()
+}
+watch(group, startFirstAnimation)
+watch(actions, startFirstAnimation, { deep: true })
+startFirstAnimation()
 
 onUnmounted(() => {
+  const firstName = Object.keys(actions as Record<string, unknown>)[0] as string | undefined
   if (!firstName)
     return
   actions[firstName]?.fadeOut(0.5).stop()
